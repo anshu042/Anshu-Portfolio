@@ -28,10 +28,5 @@ The portfolio showcases technical proficiency in:
 * **Development Tools**: Git, GitHub, Figma, AWS.
 * **Environments**: VS Code, Eclipse, NetBeans, Android Studio.
 
-## 📝 Projects Showcased
-1.  **Business Website**: A professional site crafted using HTML, CSS, and JavaScript.
-2.  **Music Player**: An intuitive interface for playlist management and audio playback.
-3.  **Sign-in Page**: A sleek, user-friendly authentication process.
-
 ---
 © 2026 Anshu Kushwaha. All Rights Reserved.
