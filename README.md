@@ -28,5 +28,8 @@ The portfolio showcases technical proficiency in:
 * **Development Tools**: Git, GitHub, Figma, AWS.
 * **Environments**: VS Code, Eclipse, NetBeans, Android Studio.
 
+## 🖥️ Preview
+<img width="1901" height="908" alt="Anshu-Portfolio-Preview04" src="https://github.com/user-attachments/assets/14e95fe2-48a7-4f2f-8e05-912d8d4f3c97" />
+
 ---
 © 2026 Anshu Kushwaha. All Rights Reserved.
