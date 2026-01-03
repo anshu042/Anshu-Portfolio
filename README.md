@@ -34,5 +34,14 @@ The portfolio showcases technical proficiency in:
 <img width="1903" height="904" alt="Anshu-Portfolio-Preview03" src="https://github.com/user-attachments/assets/0a7895a4-907b-471e-b186-46d0ec1a213b" />
 <img width="1901" height="908" alt="Anshu-Portfolio-Preview04" src="https://github.com/user-attachments/assets/14e95fe2-48a7-4f2f-8e05-912d8d4f3c97" />
 
----
-© 2026 Anshu Kushwaha. All Rights Reserved.
+<div align="center">
+  
+## 📫 Connect With Me
+
+[![Email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:anshu04232@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/anshu042)
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/anshhu04)
+
+**Anshu Kushwaha**
+
+</div>
