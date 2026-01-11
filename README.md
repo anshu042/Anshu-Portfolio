@@ -31,7 +31,7 @@ The portfolio showcases technical proficiency in:
 ## 🖥️ Preview
 <img width="1905" height="914" alt="Anshu-Portfolio-Preview01" src="https://github.com/user-attachments/assets/bee32d6f-316f-4e36-9011-37dc5d0d8fcc" />
 <img width="1900" height="906" alt="Anshu-Portfolio-Preview02" src="https://github.com/user-attachments/assets/9f303ace-4df4-4f21-9d0e-fa8a74f66161" />
-<img width="1903" height="904" alt="Anshu-Portfolio-Preview03" src="https://github.com/user-attachments/assets/0a7895a4-907b-471e-b186-46d0ec1a213b" />
+<img width="1905" height="914" alt="Anshu-Portfolio-Preview03" src="https://github.com/user-attachments/assets/974b19df-c3aa-4e94-a8f7-065516909d66" />
 <img width="1901" height="908" alt="Anshu-Portfolio-Preview04" src="https://github.com/user-attachments/assets/14e95fe2-48a7-4f2f-8e05-912d8d4f3c97" />
 
 <div align="center">
