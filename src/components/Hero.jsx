@@ -86,7 +86,7 @@ export default function Hero() {
 
       {/* Profile Image with animated ring */}
       <div
-        className="relative"
+        className="relative mt-8 sm:mt-12 md:mt-0"
         style={{
           transform: loaded ? 'scale(1)' : 'scale(0.8)',
           opacity: loaded ? 1 : 0,
@@ -105,11 +105,11 @@ export default function Hero() {
             maskComposite: 'exclude',
           }}
         />
-        <div className="w-[160px] h-[160px] rounded-full overflow-hidden relative z-10">
+        <div className="w-[150px] h-[150px] sm:w-[180px] sm:h-[180px] md:w-[220px] md:h-[220px] rounded-full overflow-hidden relative z-10 shadow-lg">
           <img
             src="/anshupp.png"
             alt="Anshu Kushwaha"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
           />
         </div>
       </div>

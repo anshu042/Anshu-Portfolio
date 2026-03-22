@@ -39,7 +39,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-0 w-full z-[1000] px-[10%] flex justify-between items-center transition-all duration-400 border-b overflow-hidden"
+        className="fixed top-0 w-full z-[1000] px-[10%] flex justify-between items-center transition-all duration-400 border-b"
         style={{
           padding: scrolled ? '12px 10%' : '20px 10%',
           background: isDark
@@ -130,7 +130,7 @@ export default function Navbar() {
         `}</style>
 
         {/* Right side */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 md:gap-6">
           {/* Desktop Navigation */}
           <ul className="list-none hidden md:flex items-center gap-1">
             {navItems.map((item) => {
@@ -202,32 +202,22 @@ export default function Navbar() {
 
           {/* Animated mobile hamburger */}
           <button
-            className="md:hidden w-8 h-8 flex flex-col justify-center items-center gap-[5px] cursor-pointer bg-transparent border-none relative"
+            className="md:hidden w-10 h-10 flex flex-col justify-center items-center gap-1.5 cursor-pointer bg-transparent border-none relative z-[1001]"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
             id="menu-toggle-btn"
           >
             <span
-              className="block w-6 h-[2px] rounded-full transition-all duration-300 origin-center"
-              style={{
-                background: isDark ? '#ffffff' : '#374151',
-                transform: isOpen ? 'rotate(45deg) translate(2.5px, 2.5px)' : 'none',
-              }}
+              className={`block w-6 h-0.5 rounded-full transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}
+              style={{ background: isDark ? '#ffffff' : '#374151' }}
             />
             <span
-              className="block w-6 h-[2px] rounded-full transition-all duration-300"
-              style={{
-                background: isDark ? '#ffffff' : '#374151',
-                opacity: isOpen ? 0 : 1,
-                transform: isOpen ? 'translateX(10px)' : 'none',
-              }}
+              className={`block w-6 h-0.5 rounded-full transition-all duration-300 ${isOpen ? 'opacity-0 translate-x-3' : ''}`}
+              style={{ background: isDark ? '#ffffff' : '#374151' }}
             />
             <span
-              className="block w-6 h-[2px] rounded-full transition-all duration-300 origin-center"
-              style={{
-                background: isDark ? '#ffffff' : '#374151',
-                transform: isOpen ? 'rotate(-45deg) translate(2.5px, -2.5px)' : 'none',
-              }}
+              className={`block w-6 h-0.5 rounded-full transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}
+              style={{ background: isDark ? '#ffffff' : '#374151' }}
             />
           </button>
         </div>
