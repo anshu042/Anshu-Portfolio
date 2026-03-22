@@ -86,7 +86,7 @@ export default function Hero() {
 
       {/* Profile Image with animated ring */}
       <div
-        className="relative mt-8 sm:mt-12 md:mt-0"
+        className="relative mt-20 sm:mt-12 md:mt-0"
         style={{
           transform: loaded ? 'scale(1)' : 'scale(0.8)',
           opacity: loaded ? 1 : 0,
