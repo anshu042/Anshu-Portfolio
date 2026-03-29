@@ -73,7 +73,7 @@ export default function Hero() {
       {/* Profile Image with animated ring */}
       {/* Profile Image with animated ring */}
       <div
-        className="relative mt-2 md:mt-0 lg:-mt-2 shrink-0 flex-none mx-auto animate-scale-in"
+        className="relative mt-2 md:mt-0 lg:-mt-2 shrink-0 flex-none mx-auto w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] animate-scale-in"
         style={{ animationDelay: '0.3s' }}
       >
         {/* Rotating ring */}
@@ -88,13 +88,14 @@ export default function Hero() {
             maskComposite: 'exclude',
           }}
         />
+        {/* Profile Image Container */}
         <div 
-          className="w-[120px] sm:w-[140px] md:w-[160px] aspect-square min-w-[120px] min-h-[120px] sm:min-w-[140px] sm:min-h-[140px] md:min-w-[160px] md:min-h-[160px] rounded-full overflow-hidden relative z-10 shadow-lg shrink-0 flex-none bg-indigo-500/10"
+          className="absolute inset-0 rounded-full overflow-hidden z-10 shadow-lg bg-indigo-500/10"
         >
           <img
             src={profileImg}
             alt="Anshu Kushwaha"
-            className="w-full h-full object-cover object-top absolute inset-0 block rounded-full"
+            className="w-full h-full object-cover object-top block rounded-full"
             loading="eager"
             fetchpriority="high"
           />
