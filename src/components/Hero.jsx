@@ -15,11 +15,6 @@ export default function Hero() {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [displayText, setDisplayText] = useState('');
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setLoaded(true), 100);
-  }, []);
 
   useEffect(() => {
     const currentRole = roles[roleIndex];
@@ -54,12 +49,8 @@ export default function Hero() {
     >
       {/* Decorative code snippet (left side, desktop only) */}
       <div
-        className="absolute left-[3%] top-[30%] hidden lg:block text-left text-xs font-mono leading-relaxed select-none text-blue-500/20 dark:text-blue-500/20"
-        style={{
-          transform: loaded ? 'translateX(0)' : 'translateX(-40px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 1s ease 0.8s',
-        }}
+        className="absolute left-[3%] top-[30%] hidden lg:block text-left text-xs font-mono leading-relaxed select-none text-blue-500/20 dark:text-blue-500/20 animate-fade-in-left"
+        style={{ animationDelay: '0.8s' }}
       >
         <div>{'const developer = {'}</div>
         <div>&nbsp;&nbsp;name: <span className="text-violet-500/25 dark:text-violet-500/30">"Anshu"</span>,</div>
@@ -70,12 +61,8 @@ export default function Hero() {
 
       {/* Decorative terminal (right side, desktop only) */}
       <div
-        className="absolute right-[3%] top-[35%] hidden lg:block text-left text-xs font-mono select-none text-blue-500/12 dark:text-blue-500/20"
-        style={{
-          transform: loaded ? 'translateX(0)' : 'translateX(40px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 1s ease 1s',
-        }}
+        className="absolute right-[3%] top-[35%] hidden lg:block text-left text-xs font-mono select-none text-blue-500/12 dark:text-blue-500/20 animate-fade-in-right"
+        style={{ animationDelay: '1s' }}
       >
         <div className="text-violet-500/15 dark:text-violet-500/25">$ npm run build</div>
         <div className="text-emerald-500/15 dark:text-emerald-500/25">✓ compiled successfully</div>
@@ -86,12 +73,8 @@ export default function Hero() {
       {/* Profile Image with animated ring */}
       {/* Profile Image with animated ring */}
       <div
-        className="relative mt-2 md:mt-0 lg:-mt-2 shrink-0 flex-none mx-auto"
-        style={{
-          transform: loaded ? 'scale(1)' : 'scale(0.8)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.3s',
-        }}
+        className="relative mt-2 md:mt-0 lg:-mt-2 shrink-0 flex-none mx-auto animate-scale-in"
+        style={{ animationDelay: '0.3s' }}
       >
         {/* Rotating ring */}
         <div
@@ -111,8 +94,7 @@ export default function Hero() {
           <img
             src={profileImg}
             alt="Anshu Kushwaha"
-            className="w-full h-full object-cover object-center absolute inset-0 block rounded-full"
-            style={{ width: '100%', height: '100%', aspectRatio: '1/1' }}
+            className="w-full h-full object-cover object-top absolute inset-0 block rounded-full"
             loading="eager"
             fetchpriority="high"
           />
@@ -121,12 +103,8 @@ export default function Hero() {
 
       {/* Heading */}
       <h1
-        className="text-[clamp(1.8rem,4vw,3.2rem)] font-extrabold leading-tight m-0 font-heading"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.4s',
-        }}
+        className="text-[clamp(1.8rem,4vw,3.2rem)] font-extrabold leading-tight m-0 font-heading animate-fade-in-up"
+        style={{ animationDelay: '0.4s' }}
       >
         <span className="text-gray-900 dark:text-white">Hi, I'm </span>
         <span className="anshu-logo" style={{ filter: 'none' }}>Anshu Kushwaha</span>
@@ -134,12 +112,8 @@ export default function Hero() {
 
       {/* Status badge */}
       <div
-        className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-semibold font-display tracking-wider uppercase text-emerald-500 bg-emerald-500/10 dark:bg-emerald-500/10 border border-emerald-500/20 dark:border-emerald-500/30"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(-20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.45s',
-        }}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] md:text-xs font-semibold font-display tracking-wider uppercase text-emerald-500 bg-emerald-500/10 dark:bg-emerald-500/10 border border-emerald-500/20 dark:border-emerald-500/30 animate-fade-in-up"
+        style={{ animationDelay: '0.45s' }}
       >
         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
         Available for opportunities
@@ -147,12 +121,8 @@ export default function Hero() {
 
       {/* Interactive Typing Text */}
       <div
-        className="flex items-center justify-center gap-2 my-1"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.5s',
-        }}
+        className="flex items-center justify-center gap-2 my-1 animate-fade-in-up"
+        style={{ animationDelay: '0.5s' }}
       >
         <span className="px-3 py-1 rounded-md text-xs font-mono bg-blue-500/10 dark:bg-blue-500/10 text-indigo-500 dark:text-blue-400 border border-indigo-500/15 dark:border-blue-500/20">
           &gt;_
@@ -168,12 +138,8 @@ export default function Hero() {
 
       {/* Description */}
       <p
-        className="text-base md:text-lg max-w-[600px] mx-auto leading-snug text-gray-600 dark:text-slate-400"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.6s',
-        }}
+        className="text-base md:text-lg max-w-[600px] mx-auto leading-snug text-gray-600 dark:text-slate-400 animate-fade-in-up"
+        style={{ animationDelay: '0.6s' }}
       >
         I enjoy building scalable, efficient applications
         with an emphasis on clean code, performance, and user experience.
@@ -181,24 +147,16 @@ export default function Hero() {
 
       {/* Social Links */}
       <div
-        className="scale-90 md:scale-100 origin-center"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.7s',
-        }}
+        className="scale-90 md:scale-100 origin-center animate-fade-in-up"
+        style={{ animationDelay: '0.7s' }}
       >
         <SocialLinks />
       </div>
 
       {/* CTA Buttons */}
       <div
-        className="flex gap-3 justify-center mt-1 flex-col sm:flex-row w-full max-w-[300px] sm:max-w-none sm:w-auto"
-        style={{
-          transform: loaded ? 'translateY(0)' : 'translateY(20px)',
-          opacity: loaded ? 1 : 0,
-          transition: 'all 0.6s ease 0.8s',
-        }}
+        className="flex gap-3 justify-center mt-1 flex-col sm:flex-row w-full max-w-[300px] sm:max-w-none sm:w-auto animate-fade-in-up"
+        style={{ animationDelay: '0.8s' }}
       >
         <a
           href="#projects"
@@ -225,11 +183,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex-col items-center gap-1 [@media(max-height:750px)]:hidden flex"
-        style={{
-          opacity: loaded ? 0.5 : 0,
-          transition: 'opacity 1s ease 1.2s',
-        }}
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex-col items-center gap-1 [@media(max-height:750px)]:hidden flex animate-fade-in-up opacity-50"
+        style={{ animationDelay: '1.2s' }}
       >
         <span className="text-[10px] font-display tracking-widest uppercase text-gray-500 dark:text-slate-500">
           Scroll
