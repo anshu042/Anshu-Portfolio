@@ -98,3 +98,84 @@ html.dark .text-primary {
 html.dark a {
   color: inherit;
 }
+
+/* ========== Component Styles ========== */
+
+/* Navbar — animated gradient logo text */
+.anshu-logo {
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientText 3s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(59,130,246,0.3));
+}
+
+/* ========== Keyframe Animations ========== */
+
+/* Navbar — logo text shimmer */
+@keyframes gradientText {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Navbar & Footer — gradient line slide */
+@keyframes gradientSlide {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Navbar — energy pulse sweep */
+@keyframes navScan {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Footer — gradient divider (same as gradientSlide, aliased for clarity) */
+@keyframes footerGradientSlide {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Hero — profile image rotating ring */
+@keyframes spinRing {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hero — scroll indicator dot */
+@keyframes scrollDot {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.3; }
+}
+
+/* Background — floating elements */
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(20px, -30px) rotate(2deg); }
+  66% { transform: translate(-15px, 15px) rotate(-1deg); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-25px, 20px) rotate(-2deg); }
+  66% { transform: translate(20px, -20px) rotate(1deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -25px); }
+}
+
+/* Background — animated scan lines */
+@keyframes scanline {
+  0%, 100% { opacity: 0; transform: translateX(-100%); }
+  50% { opacity: 1; transform: translateX(100%); }
+}
+
+/* Background — slow gear rotation */
+@keyframes spinSlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useTheme } from '../ThemeContext';
+import { hexToRgb } from '../utils';
 
 const skillCategories = [
   {
@@ -75,64 +76,17 @@ const stats = [
   { value: '100%', label: 'Passion' },
 ];
 
-// Helper: convert hex color to r,g,b string
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `${r},${g},${b}`;
-}
-
 export default function About() {
   const { isDark } = useTheme();
-  const [isVisible, setIsVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('skills');
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const tabBtnStyle = (isActive) => ({
-    background: isActive
-      ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)'
-      : isDark ? 'rgba(255,255,255,0.05)' : '#f3f4f6',
-    color: isActive ? '#ffffff' : isDark ? '#cbd5e1' : '#6b7280',
-    border: isActive ? 'none' : `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : '#e5e7eb'}`,
-  });
-
-  const cardBase = {
-    background: isDark ? 'rgba(30,41,59,0.6)' : '#ffffff',
-    border: `1px solid ${isDark ? 'rgba(59,130,246,0.3)' : '#e5e7eb'}`,
-    boxShadow: isDark ? '0 0 20px rgba(59,130,246,0.1)' : '0 4px 15px rgba(0,0,0,0.08)',
-    backdropFilter: isDark ? 'blur(10px)' : 'none',
-  };
-
   return (
-    <section id="about" className="px-[10%] py-[100px]" ref={sectionRef}>
-      <h2
-        className="text-center text-[2.5rem] font-bold mb-4 font-heading"
-        style={{ color: isDark ? '#ffffff' : '#111827' }}
-      >
+    <section id="about" className="px-5 md:px-[10%] py-[100px]" ref={sectionRef}>
+      <h2 className="text-center text-[2.5rem] font-bold mb-4 font-heading text-gray-900 dark:text-white">
         About Me
       </h2>
-      <p
-        className="text-center text-lg mb-12 max-w-2xl mx-auto"
-        style={{ color: isDark ? '#94a3b8' : '#6b7280' }}
-      >
+      <p className="text-center text-lg mb-12 max-w-2xl mx-auto text-gray-600 dark:text-slate-400">
         A passionate developer who loves turning ideas into reality
       </p>
 
@@ -141,18 +95,12 @@ export default function About() {
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="text-center p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-            style={{
-              background: isDark ? 'rgba(30,41,59,0.6)' : '#ffffff',
-              border: `1px solid ${isDark ? 'rgba(59,130,246,0.3)' : '#e5e7eb'}`,
-              boxShadow: isDark ? '0 0 15px rgba(59,130,246,0.1)' : '0 4px 6px rgba(0,0,0,0.05)',
-              backdropFilter: isDark ? 'blur(10px)' : 'none',
-            }}
+            className="text-center p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg bg-white dark:bg-slate-800/60 border border-gray-200 dark:border-blue-500/30 shadow-sm dark:shadow-[0_0_15px_rgba(59,130,246,0.1)] dark:backdrop-blur-[10px]"
           >
-            <div className="text-3xl font-extrabold font-heading bg-gradient-to-r from-primary to-accent bg-clip-text" style={{ WebkitTextFillColor: 'transparent' }}>
+            <div className="text-3xl font-extrabold font-heading bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {stat.value}
             </div>
-            <div className="text-sm mt-1 font-medium" style={{ color: isDark ? '#94a3b8' : '#6b7280' }}>
+            <div className="text-sm mt-1 font-medium text-gray-600 dark:text-slate-400">
               {stat.label}
             </div>
           </div>
@@ -161,7 +109,7 @@ export default function About() {
 
       {/* Bio */}
       <div className="max-w-4xl mx-auto mb-12">
-        <p className="text-lg leading-relaxed mb-6 text-justify" style={{ color: isDark ? '#cbd5e1' : '#4b5563' }}>
+        <p className="text-lg leading-relaxed mb-6 text-justify text-gray-600 dark:text-slate-300">
           I am a dedicated software developer with a strong interest in building reliable,
           scalable, and user-focused applications. I enjoy working across different layers
           of development, combining logical problem-solving with clean and maintainable
@@ -171,16 +119,27 @@ export default function About() {
 
       {/* Tab Switcher */}
       <div className="flex justify-center gap-3 mb-10">
-        {['skills', 'expertise'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className="px-6 py-2.5 rounded-full text-sm font-bold cursor-pointer transition-all duration-300 font-display tracking-wide capitalize"
-            style={tabBtnStyle(activeTab === tab)}
-          >
-            {tab === 'skills' ? '⚡ Technical Skills' : '🎯 Core Expertise'}
-          </button>
-        ))}
+        {['skills', 'expertise'].map((tab) => {
+          const isActive = activeTab === tab;
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-6 py-2.5 rounded-full text-sm font-bold cursor-pointer transition-all duration-300 font-display tracking-wide capitalize ${
+                isActive
+                  ? 'text-white border-none shadow-[0_2px_12px_rgba(59,130,246,0.4)]'
+                  : 'text-gray-600 dark:text-slate-300 border border-gray-200 dark:border-white/10'
+              }`}
+              style={
+                isActive
+                  ? { background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }
+                  : { background: isDark ? 'rgba(255,255,255,0.05)' : '#f3f4f6' }
+              }
+            >
+              {tab === 'skills' ? '⚡ Technical Skills' : '🎯 Core Expertise'}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tab Content */}
@@ -190,30 +149,27 @@ export default function About() {
             {skillCategories.map((cat, i) => (
               <div
                 key={i}
-                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group"
-                style={cardBase}
+                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group bg-white dark:bg-slate-800/60 border border-gray-200 dark:border-blue-500/30 shadow-md dark:shadow-[0_0_20px_rgba(59,130,246,0.1)] dark:backdrop-blur-[10px]"
               >
                 {/* Category Header */}
                 <div className="flex items-center gap-3 mb-5">
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: isDark ? 'rgba(59,130,246,0.15)' : '#eff6ff' }}
-                  >
-                    <svg viewBox="0 0 24 24" className="w-5 h-5 fill-primary">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-110 bg-blue-50 dark:bg-blue-500/15">
+                    <svg aria-hidden="true" viewBox="0 0 24 24" className="w-5 h-5 fill-primary">
                       <path d={cat.icon} />
                     </svg>
                   </div>
-                  <h4 className="text-base font-bold font-heading" style={{ color: isDark ? '#ffffff' : '#111827' }}>
+                  <h4 className="text-base font-bold font-heading text-gray-900 dark:text-white">
                     {cat.category}
                   </h4>
                 </div>
 
-                {/* Skill Chips */}
+                {/* Skill Chips — dynamic colors need inline styles */}
                 <div className="flex flex-wrap gap-2">
                   {cat.skills.map((skill) => (
                     <span
                       key={skill.name}
-                      className="px-4 py-2 rounded-lg text-sm font-semibold font-display transition-all duration-300 cursor-default hover:scale-105"
+                      tabIndex="0"
+                      className="px-4 py-2 rounded-lg text-sm font-semibold font-display transition-all duration-300 cursor-default hover:scale-105 focus:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/40"
                       style={{
                         background: isDark
                           ? `rgba(${hexToRgb(skill.color)}, 0.12)`
@@ -237,21 +193,17 @@ export default function About() {
             {expertise.map((item, i) => (
               <div
                 key={i}
-                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group cursor-default"
-                style={cardBase}
+                className="rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 group cursor-default bg-white dark:bg-slate-800/60 border border-gray-200 dark:border-blue-500/30 shadow-md dark:shadow-[0_0_20px_rgba(59,130,246,0.1)] dark:backdrop-blur-[10px]"
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: isDark ? 'rgba(59,130,246,0.15)' : '#eff6ff' }}
-                >
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-primary">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 bg-blue-50 dark:bg-blue-500/15">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" className="w-6 h-6 fill-primary">
                     <path d={item.icon} />
                   </svg>
                 </div>
-                <h4 className="text-lg font-bold mb-2 font-heading" style={{ color: isDark ? '#ffffff' : '#111827' }}>
+                <h4 className="text-lg font-bold mb-2 font-heading text-gray-900 dark:text-white">
                   {item.title}
                 </h4>
-                <p className="text-sm leading-relaxed" style={{ color: isDark ? '#94a3b8' : '#6b7280' }}>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-slate-400">
                   {item.desc}
                 </p>
               </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from '../ThemeContext';
+import { hexToRgb } from '../utils';
 
 const quickLinks = [
   { label: 'Home', href: '#home' },
@@ -35,13 +36,6 @@ const socialLinks = [
   },
 ];
 
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `${r},${g},${b}`;
-}
-
 export default function Footer() {
   const { isDark } = useTheme();
   const [hoveredSocial, setHoveredSocial] = useState(null);
@@ -52,44 +46,36 @@ export default function Footer() {
 
   return (
     <footer
-      className="relative overflow-hidden"
+      className="relative overflow-hidden border-t border-blue-500/15 dark:border-blue-500/15"
       style={{
         background: isDark
           ? 'linear-gradient(180deg, #020617, #0f172a)'
           : 'linear-gradient(180deg, #e0e7ff, #ede9fe)',
-        borderTop: `1px solid ${isDark ? 'rgba(59,130,246,0.15)' : 'rgba(139,92,246,0.1)'}`,
       }}
     >
       {/* Top gradient divider - animated like navbar */}
       <div className="h-[2px] w-full" style={{
-        background: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)',
+        backgroundImage: 'linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)',
         backgroundSize: '200% 100%',
         animation: 'footerGradientSlide 3s linear infinite',
       }} />
 
-      <div className="max-w-6xl mx-auto px-[10%] pt-12 pb-6">
+      <div className="max-w-6xl mx-auto px-5 md:px-[10%] pt-12 pb-6">
         {/* Top section: Brand + Links + Socials */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand */}
           <div>
-            <div
-              className="text-2xl font-extrabold font-heading mb-3"
-              style={{
-                background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+            <div className="text-2xl font-extrabold font-heading mb-3 bg-gradient-to-br from-primary to-accent bg-clip-text text-transparent">
               ANSHU
             </div>
-            <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: isDark ? '#94a3b8' : '#6b7280' }}>
+            <p className="text-sm leading-relaxed max-w-[280px] text-gray-600 dark:text-slate-400">
               Software Developer passionate about building scalable, user-focused applications with clean code.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold font-heading mb-4 text-sm tracking-widest uppercase" style={{ color: isDark ? '#e2e8f0' : '#374151' }}>
+            <h4 className="font-bold font-heading mb-4 text-sm tracking-widest uppercase text-gray-700 dark:text-slate-200">
               Quick Links
             </h4>
             <ul className="list-none flex flex-col gap-2">
@@ -97,16 +83,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="no-underline text-sm font-medium transition-all duration-300 flex items-center gap-2 group"
-                    style={{ color: isDark ? '#94a3b8' : '#6b7280' }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#3b82f6';
-                      e.currentTarget.style.transform = 'translateX(6px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = isDark ? '#94a3b8' : '#6b7280';
-                      e.currentTarget.style.transform = 'translateX(0)';
-                    }}
+                    className="no-underline text-sm font-medium transition-all duration-300 flex items-center gap-2 group text-gray-600 dark:text-slate-400 hover:text-primary hover:translate-x-1.5"
                   >
                     <span className="text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">→</span>
                     {link.label}
@@ -118,90 +95,80 @@ export default function Footer() {
 
           {/* Connect */}
           <div>
-            <h4 className="font-bold font-heading mb-4 text-sm tracking-widest uppercase" style={{ color: isDark ? '#e2e8f0' : '#374151' }}>
+            <h4 className="font-bold font-heading mb-4 text-sm tracking-widest uppercase text-gray-700 dark:text-slate-200">
               Connect
             </h4>
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.name}
-                  className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
-                  style={{
-                    background: hoveredSocial === social.name
-                      ? `rgba(${hexToRgb(social.color)}, 0.15)`
-                      : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
-                    border: `1px solid ${hoveredSocial === social.name
-                      ? social.color
-                      : isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
-                    transform: hoveredSocial === social.name ? 'translateY(-3px)' : 'none',
-                    boxShadow: hoveredSocial === social.name
-                      ? `0 4px 15px rgba(${hexToRgb(social.color)}, 0.3)` : 'none',
-                  }}
-                  onMouseEnter={() => setHoveredSocial(social.name)}
-                  onMouseLeave={() => setHoveredSocial(null)}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="w-4 h-4 transition-colors duration-300"
-                    style={{ fill: hoveredSocial === social.name ? social.color : isDark ? '#94a3b8' : '#6b7280' }}
+              {socialLinks.map((social) => {
+                const rgb = hexToRgb(social.color);
+                const isHovered = hoveredSocial === social.name;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.name}
+                    className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
+                    style={{
+                      background: isHovered
+                        ? `rgba(${rgb}, 0.15)`
+                        : isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)',
+                      border: `1px solid ${isHovered ? social.color : isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.08)'}`,
+                      transform: isHovered ? 'translateY(-3px)' : 'none',
+                      boxShadow: isHovered ? `0 4px 15px rgba(${rgb}, 0.3)` : 'none',
+                    }}
+                    onMouseEnter={() => setHoveredSocial(social.name)}
+                    onMouseLeave={() => setHoveredSocial(null)}
                   >
-                    <path d={social.icon} />
-                  </svg>
-                </a>
-              ))}
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="w-4 h-4 transition-colors duration-300"
+                      style={{ fill: isHovered ? social.color : isDark ? '#94a3b8' : '#6b7280' }}
+                    >
+                      <path d={social.icon} />
+                    </svg>
+                  </a>
+                );
+              })}
             </div>
-            <p className="text-xs mt-4" style={{ color: isDark ? '#64748b' : '#9ca3af' }}>
+            <p className="text-xs mt-4 text-slate-600 dark:text-slate-600">
               anshu04232@gmail.com
             </p>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="h-px w-full mb-6" style={{
-          background: isDark
-            ? 'linear-gradient(90deg, transparent, rgba(59,130,246,0.2), transparent)'
-            : 'linear-gradient(90deg, transparent, rgba(139,92,246,0.15), transparent)',
-        }} />
+        <div
+          className="h-px w-full mb-6"
+          style={{
+            backgroundImage: isDark
+              ? 'linear-gradient(90deg, transparent, rgba(59,130,246,0.2), transparent)'
+              : 'linear-gradient(90deg, transparent, rgba(139,92,246,0.15), transparent)',
+          }}
+        />
 
         {/* Bottom: Copyright + Back to top */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs" style={{ color: isDark ? '#64748b' : '#9ca3af' }}>
+          <p className="text-xs text-slate-600 dark:text-slate-600">
             © 2026 Anshu Kushwaha.
           </p>
 
           {/* Back to top */}
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-xs font-semibold cursor-pointer bg-transparent border-none transition-all duration-300 group"
-            style={{ color: isDark ? '#94a3b8' : '#6b7280' }}
-            onMouseEnter={(e) => e.currentTarget.style.color = '#3b82f6'}
-            onMouseLeave={(e) => e.currentTarget.style.color = isDark ? '#94a3b8' : '#6b7280'}
+            className="flex items-center gap-2 text-xs font-semibold cursor-pointer bg-transparent border-none transition-all duration-300 group text-gray-600 dark:text-slate-400 hover:text-primary"
           >
             Back to top
-            <span
-              className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1"
-              style={{
-                background: isDark ? 'rgba(59,130,246,0.1)' : 'rgba(59,130,246,0.08)',
-                border: `1px solid ${isDark ? 'rgba(59,130,246,0.3)' : 'rgba(59,130,246,0.2)'}`,
-              }}
-            >
-              <svg viewBox="0 0 24 24" className="w-4 h-4 fill-primary">
+            <span className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 group-hover:-translate-y-1 bg-blue-500/10 dark:bg-blue-500/10 border border-blue-500/20 dark:border-blue-500/30">
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="w-4 h-4 fill-primary">
                 <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
               </svg>
             </span>
           </button>
         </div>
       </div>
-      <style>{`
-        @keyframes footerGradientSlide {
-          0% { background-position: 0% 0; }
-          100% { background-position: 200% 0; }
-        }
-      `}</style>
+
     </footer>
   );
 }

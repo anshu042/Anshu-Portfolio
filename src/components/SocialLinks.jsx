@@ -1,9 +1,10 @@
 import { useTheme } from '../ThemeContext';
+import { hexToRgb } from '../utils';
 
 const socialData = [
   {
     name: 'linkedin',
-    href: 'https://www.linkedin.com/in/anshu042?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+    href: 'https://www.linkedin.com/in/anshu042',
     color: '#0077b5',
     path: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z',
   },
@@ -32,47 +33,42 @@ export default function SocialLinks({ className = '' }) {
 
   return (
     <div className={`flex justify-center gap-5 mt-8 ${className}`}>
-      {socialData.map((social) => (
-        <a
-          key={social.name}
-          href={social.href}
-          className="w-[50px] h-[50px] flex items-center justify-center rounded-full transition-all duration-300 p-3 hover:-translate-y-2 group"
-          style={{
-            border: `2px solid ${isDark ? social.color : '#d1d5db'}`,
-            background: isDark ? `rgba(${hexToRgb(social.color)}, 0.1)` : 'transparent',
-            boxShadow: isDark ? `0 0 12px rgba(${hexToRgb(social.color)}, 0.25)` : 'none',
-          }}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={social.name}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = `rgba(${hexToRgb(social.color)}, ${isDark ? 0.25 : 0.1})`;
-            e.currentTarget.style.boxShadow = `0 0 20px rgba(${hexToRgb(social.color)}, 0.5)`;
-            e.currentTarget.style.borderColor = social.color;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = isDark ? `rgba(${hexToRgb(social.color)}, 0.1)` : 'transparent';
-            e.currentTarget.style.boxShadow = isDark ? `0 0 12px rgba(${hexToRgb(social.color)}, 0.25)` : 'none';
-            e.currentTarget.style.borderColor = isDark ? social.color : '#d1d5db';
-          }}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="w-5 h-5 transition-all duration-300"
-            style={{ fill: isDark ? social.color : '#4b5563' }}
+      {socialData.map((social) => {
+        const rgb = hexToRgb(social.color);
+        return (
+          <a
+            key={social.name}
+            href={social.href}
+            className="w-[50px] h-[50px] flex items-center justify-center rounded-full transition-all duration-300 p-3 hover:-translate-y-2 group"
+            style={{
+              border: `2px solid ${isDark ? social.color : '#d1d5db'}`,
+              background: isDark ? `rgba(${rgb}, 0.1)` : 'transparent',
+              boxShadow: isDark ? `0 0 12px rgba(${rgb}, 0.25)` : 'none',
+            }}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={social.name}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `rgba(${rgb}, ${isDark ? 0.25 : 0.1})`;
+              e.currentTarget.style.boxShadow = `0 0 20px rgba(${rgb}, 0.5)`;
+              e.currentTarget.style.borderColor = social.color;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = isDark ? `rgba(${rgb}, 0.1)` : 'transparent';
+              e.currentTarget.style.boxShadow = isDark ? `0 0 12px rgba(${rgb}, 0.25)` : 'none';
+              e.currentTarget.style.borderColor = isDark ? social.color : '#d1d5db';
+            }}
           >
-            <path d={social.path} />
-          </svg>
-        </a>
-      ))}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-5 h-5 transition-all duration-300"
+              style={{ fill: isDark ? social.color : '#4b5563' }}
+            >
+              <path d={social.path} />
+            </svg>
+          </a>
+        );
+      })}
     </div>
   );
-}
-
-// Helper: convert hex color to r,g,b string
-function hexToRgb(hex) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `${r},${g},${b}`;
 }
