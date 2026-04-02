@@ -78,7 +78,7 @@ export default function Hero() {
       >
         {/* Rotating ring */}
         <div
-          className="absolute inset-[-6px] rounded-full aspect-square"
+          className="absolute inset-[-6px] rounded-full"
           style={{
             background: 'conic-gradient(from 0deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6)',
             animation: 'spinRing 4s linear infinite',
@@ -184,7 +184,7 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 flex-col items-center gap-1 [@media(max-height:750px)]:hidden flex animate-fade-in-up opacity-50"
+        className="absolute bottom-4 inset-x-0 w-full flex-col items-center gap-1 [@media(max-height:750px)]:hidden flex animate-fade-in-up opacity-50 pointer-events-none"
         style={{ animationDelay: '1.2s' }}
       >
         <span className="text-[10px] font-display tracking-widest uppercase text-gray-500 dark:text-slate-500">

@@ -34,3 +34,14 @@ dist-ssr
 lint*.json
 lint-summary.txt
 .eslintcache
+
+# Testing
+/coverage
+
+# Production & Deployment
+/build
+.vercel
+.netlify
+
+# System Files
+Thumbs.db
