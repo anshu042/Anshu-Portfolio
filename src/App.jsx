@@ -23,6 +23,25 @@ function App() {
     }
   }, []);
 
+  // Title cycling effect
+  useEffect(() => {
+    const titles = [
+      "Anshu Kushwaha | Portfolio",
+      "Software Developer",
+      "Web Developer",
+      "Problem Solver"
+    ];
+    let index = 0;
+    
+    const intervalId = setInterval(() => {
+      document.title = titles[index];
+      index = (index + 1) % titles.length;
+    }, 2000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+
   return (
     <>
       <Background />
